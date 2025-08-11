@@ -3,17 +3,22 @@
 <head>
   <meta charset="utf-8">
   <title>إظهار شاشة الهاتف على الكمبيوتر (أندرويد و آيفون) | دليل سريع + أوامر scrcpy</title>
-  <meta name="description" content="أفضل طرق عرض شاشة الهاتف على الكمبيوتر: scrcpy عبر USB، النسخ اللاسلكي (Cast/Miracast)، Chromecast/Google Home، ومستقبلات AirPlay للآيفون. خطوات مفصلة، أوامر جاهزة، وحلول لأبرز المشاكل.">
+  <meta name="description" content="أفضل طرق عرض شاشة الهاتف على الكمبيوتر: scrcpy عبر USB واللاسلكي، Cast/Miracast، Chromecast/Google Home، ومستقبلات AirPlay للآيفون. خطوات مفصّلة، أوامر جاهزة، وحلول لأبرز المشاكل.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <!-- المصدر الأصلي للمحتوى على إدراك — يُرجى ترك هذا الرابط كما هو -->
-  <link rel="canonical" href="https://idraaak.com/%d8%a7%d8%b8%d9%87%d8%a7%d8%b1-%d8%b4%d8%a7%d8%b4%d8%a9-%d8%a7%d9%84%d9%87%d8%a7%d8%aa%d9%81-%d8%b9%d9%84%d9%89-%d8%a7%d9%84%d9%83%d9%85%d8%a8%d9%8a%d9%88%d8%aa%d8%b1/">
-  <meta property="og:title" content="إظهار شاشة الهاتف على الكمبيوتر | دليل سريع">
-  <meta property="og:description" content="كل الطرق المهمة: scrcpy عبر USB، الإرسال اللاسلكي (Cast/Miracast)، Chromecast، و AirPlay للآيفون.">
+
+  <!-- نجعل الصفحة تشير إلى نفسها لبحث جوجل -->
+  <link rel="canonical" href="https://nedal-dev.github.io/scrcpy-helper-ar/">
+  <meta name="robots" content="index,follow">
+
+  <!-- OG -->
+  <meta property="og:title" content="إظهار شاشة الهاتف على الكمبيوتر | دليل سريع + أوامر scrcpy">
+  <meta property="og:description" content="كل الطرق المهمة: scrcpy عبر USB واللاسلكي، الإرسال Cast/Miracast، Chromecast، و AirPlay للآيفون مع حلول للمشاكل.">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://idraaak.com/%d8%a7%d8%b8%d9%87%d8%a7%d8%b1-%d8%b4%d8%a7%d8%b4%d8%a9-%d8%a7%d9%84%d9%87%d8%a7%d8%aa%d9%81-%d8%b9%d9%84%d9%89-%d8%a7%d9%84%d9%83%d9%85%d8%a8%d9%8a%d9%88%d8%aa%d8%b1/">
+  <meta property="og:url" content="https://nedal-dev.github.io/scrcpy-helper-ar/">
+
   <style>
     :root { --w: 880px; }
-    body { margin:0; font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif; line-height:1.85; background:#fff; color:#0f172a; }
+    body { margin:0; font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif; line-height:1.9; background:#fff; color:#0f172a; }
     main { max-width:var(--w); margin:44px auto; padding:0 18px; }
     h1{font-size:1.9rem; margin:.2em 0 .8em}
     h2{font-size:1.35rem; margin:1.6em 0 .6em}
@@ -30,7 +35,7 @@
     th,td{border:1px solid #e5e7eb;padding:8px 10px;text-align:center}
     th{background:#f3f4f6}
     ul{padding-inline-start:20px;margin:.3em 0}
-    footer{margin:28px 0 14px;color:#5b6472;font-size:.95rem}
+    footer{margin:28px 0 14px;color:#5b6472;font-size:.95rem;text-align:center}
   </style>
 </head>
 <body>
@@ -39,96 +44,116 @@
   <h1>إظهار شاشة الهاتف على الكمبيوتر (أندرويد و آيفون)</h1>
 
   <div class="box">
-    <strong>خلاصة سريعة:</strong> أفضل دقة واستجابة ستحصل عليها مع <b>scrcpy عبر USB</b>. للراحة اللاسلكية استخدم <b>الإرسال/البث (Cast/Miracast)</b> أو <b>Chromecast</b>. للآيفون تحتاج <b>مستقبل AirPlay</b> على ويندوز. الشرح المفصّل بالصور موجود في المقال الأصلي على إدراك:
-    <div style="margin-top:10px">
-      <a class="cta" href="https://idraaak.com/%d8%a7%d8%b8%d9%87%d8%a7%d8%b1-%d8%b4%d8%a7%d8%b4%d8%a9-%d8%a7%d9%84%d9%87%d8%a7%d8%aa%d9%81-%d8%b9%d9%84%d9%89-%d8%a7%d9%84%d9%83%d9%85%d8%a8%d9%8a%d9%88%d8%aa%d8%b1/">الشرح الكامل على إدراك</a>
-    </div>
+    <strong>الخلاصة السريعة:</strong>
+    لأفضل دقة واستجابة استخدم <b>scrcpy عبر USB</b>. للراحة اللاسلكية: <b>Cast/Miracast</b> أو <b>Chromecast</b>. وللآيفون تحتاج <b>مستقبل AirPlay</b> على ويندوز.
   </div>
 
   <h2>مقارنة سريعة بين الطرق</h2>
   <table>
     <thead>
-      <tr><th>الطريقة</th><th>الدقة/الوضوح</th><th>الزمن/الاستجابة</th><th>المنصات</th><th>ملاحظات</th></tr>
+      <tr><th>الطريقة</th><th>الدقة/الوضوح</th><th>الاستجابة</th><th>المنصات</th><th>ملاحظات</th></tr>
     </thead>
     <tbody>
-      <tr><td>scrcpy (USB)</td><td>عالية جدًا (حتى 1080p+)</td><td>الأفضل (أقل تأخير)</td><td>Windows / macOS / Linux (أندرويد)</td><td>مجاني ومفتوح المصدر، يحتاج ADB وUSB Debugging</td></tr>
-      <tr><td>Cast / Miracast</td><td>جيدة</td><td>متوسطة</td><td>أندرويد ⇄ ويندوز 10/11</td><td>يشترط نفس الشبكة ودعم Miracast</td></tr>
-      <tr><td>Chromecast / Google Home</td><td>جيدة–عالية</td><td>متوسطة</td><td>أندرويد ⇄ أي جهاز يدعم Chromecast</td><td>مستقر وسهل، قد يستهلك الشبكة</td></tr>
-      <tr><td>AirPlay (آيفون)</td><td>عالية</td><td>متوسطة</td><td>iOS ⇄ Windows (مع مستقبل AirPlay)</td><td>يتطلب برنامج استقبال AirPlay على الكمبيوتر</td></tr>
+      <tr><td>scrcpy (USB)</td><td>عالية جدًا (حتى 1080p+)</td><td>الأفضل (أقل تأخير)</td><td>Windows / macOS / Linux (أندرويد)</td><td>مجاني ومفتوح المصدر؛ يحتاج ADB وUSB Debugging</td></tr>
+      <tr><td>scrcpy لاسلكي</td><td>جيدة</td><td>جيّدة</td><td>نفس أعلاه</td><td>يتطلب شبكة Wi-Fi قوية</td></tr>
+      <tr><td>Cast / Miracast</td><td>جيدة</td><td>متوسطة</td><td>أندرويد ⇄ ويندوز 10/11</td><td>يشترط دعم Miracast ونفس الشبكة</td></tr>
+      <tr><td>Chromecast / Google Home</td><td>جيدة–عالية</td><td>متوسطة</td><td>أندرويد ⇄ أي جهاز يدعم Chromecast</td><td>حل مستقر وسهل</td></tr>
+      <tr><td>AirPlay (آيفون)</td><td>عالية</td><td>متوسطة</td><td>iOS ⇄ Windows (مع مستقبل AirPlay)</td><td>يتطلب برنامج استقبال على الكمبيوتر</td></tr>
     </tbody>
   </table>
 
   <h2>الطريقة ①: scrcpy عبر USB (أندرويد)</h2>
-  <p><b>الأفضل للمونتاج والشرح والبث</b> لأنه يُعطي صورة واضحة مع تأخير منخفض جدًا.</p>
-  <h3>الخطوات</h3>
+  <p><b>الأفضل للمونتاج والشرح والبث</b> لأن التأخير منخفض جدًا والصورة واضحة.</p>
+
+  <h3>خطوات التحضير على الهاتف</h3>
   <ul>
-    <li>فعِّل <b>خيارات المطوّر</b> ثم <b>USB Debugging</b> على هاتفك الأندرويد.</li>
-    <li>ثبّت ADB وscrcpy على جهازك (ويندوز/لينكس/ماك). ثم وصّل الهاتف بكابل USB أصلي.</li>
-    <li>شغّل الأمر الافتراضي لفتح الشاشة:</li>
+    <li>فعِّل <b>خيارات المطوّر</b> ثم <b>USB Debugging</b> (وفي بعض الأجهزة: <b>USB debugging (Security)</b>).</li>
+    <li>عند التوصيل لأول مرة ستظهر رسالة <b>Allow USB debugging</b> على الهاتف — اختر <b>Allow</b>.</li>
   </ul>
-  <pre><code>scrcpy</code></pre>
+
+  <h3>التثبيت السريع على الكمبيوتر</h3>
+  <ul>
+    <li><b>Windows</b>: ثبّت ADB وscrcpy، ثم افتح <kbd>cmd</kbd> وشغّل:
+      <pre><code>choco install adb scrcpy   <!-- إن كان لديك Chocolatey -->
+:: أو حمّل scrcpy من صفحة الإصدارات الرسمية وثبّته يدويًا</code></pre>
+    </li>
+    <li><b>macOS</b>:
+      <pre><code>brew install android-platform-tools scrcpy</code></pre>
+    </li>
+    <li><b>Ubuntu/Debian</b>:
+      <pre><code>sudo apt update
+sudo apt install scrcpy adb</code></pre>
+    </li>
+  </ul>
+
+  <h3>تشغيل scrcpy</h3>
+  <ul>
+    <li>وصّل الهاتف بكابل USB أصلي، ثم:
+      <pre><code>scrcpy</code></pre>
+    </li>
+  </ul>
+
   <h3>أوامر مفيدة</h3>
   <ul>
-    <li>تحديد دقة العرض (تصغير العرض إلى 1080 حتى تقلل الضغط):</li>
+    <li>تصغير الدقة لتقليل الضغط:
+      <pre><code>scrcpy --max-size 1080</code></pre>
+    </li>
+    <li>تخفيض البت ريت لاتصال أضعف:
+      <pre><code>scrcpy --bit-rate 4M</code></pre>
+    </li>
+    <li>ملء الشاشة:
+      <pre><code>scrcpy --fullscreen</code></pre>
+    </li>
+    <li>تسجيل الشاشة أثناء العرض:
+      <pre><code>scrcpy --record session.mp4</code></pre>
+    </li>
+    <li>إطفاء شاشة الهاتف أثناء العرض لتوفير البطارية:
+      <pre><code>scrcpy --turn-screen-off</code></pre>
+    </li>
   </ul>
-  <pre><code>scrcpy --max-size 1080</code></pre>
-  <ul>
-    <li>تخفيض البت ريت (للاتصال الأضعف):</li>
-  </ul>
-  <pre><code>scrcpy --bit-rate 4M</code></pre>
-  <ul>
-    <li>ملء الشاشة:</li>
-  </ul>
-  <pre><code>scrcpy --fullscreen</code></pre>
-  <ul>
-    <li>وضع لاسلكي (مرة واحدة عبر USB):</li>
-  </ul>
-  <pre><code>adb tcpip 5555
-adb connect هاتفك-أو-192.168.x.x:5555
-scrcpy</code></pre>
-  <p class="box">عند ظهور رسالة <b>Allow USB debugging</b> على الهاتف، اختر <b>Allow</b>. إن لم يتعرف الكمبيوتر، ثبّت تعريف الشركة المصنّعة (OEM) أو جرّب كابل USB آخر.</p>
 
-  <h2>الطريقة ②: الإرسال اللاسلكي (Cast / Miracast)</h2>
-  <p>للشرح السريع بدون كابلات. يعمل على أغلب هواتف أندرويد مع ويندوز 10/11.</p>
-  <h3>الخطوات المختصرة</h3>
+  <h2>الطريقة ②: scrcpy لاسلكي (Android over Wi-Fi)</h2>
+  <p>إعداد لمرة واحدة عبر USB، ثم الاتصال عبر الشبكة.</p>
+  <pre><code>adb tcpip 5555
+adb connect 192.168.x.x:5555   # استبدل بعنوان هاتفك
+scrcpy</code></pre>
+  <p class="box">إن لم يتصل: تأكد من أن الهاتف والكمبيوتر على نفس الشبكة، وأن جدار الحماية لا يحجب المنفذ 5555.</p>
+
+  <h2>الطريقة ③: الإرسال اللاسلكي (Cast / Miracast)</h2>
   <ul>
     <li>تأكد أن الهاتف والكمبيوتر على <b>نفس شبكة Wi-Fi</b>.</li>
-    <li>على ويندوز: فعِّل ميزة <b>Wireless Display</b> (إن لزم)، ثم افتح <b>الإعدادات &gt; النظام &gt; العرض &gt; الإسقاط إلى هذا الكمبيوتر</b>.</li>
-    <li>على الهاتف: افتح <b>البث/الإرسال</b> أو <b>Cast / Smart View / Screen Share</b> واختر جهاز الكمبيوتر.</li>
+    <li>على ويندوز: فعّل <b>Wireless Display</b> ثم افتح <b>Settings &gt; System &gt; Projecting to this PC</b>.</li>
+    <li>على الهاتف: افتح <b>Cast / Smart View / Screen Share</b> واختر جهاز الكمبيوتر.</li>
   </ul>
 
-  <h2>الطريقة ③: Chromecast / Google Home (أندرويد)</h2>
-  <p>حل مستقر لبث الشاشة أو تطبيقات معيّنة عبر الشبكة.</p>
+  <h2>الطريقة ④: Chromecast / Google Home</h2>
   <ul>
-    <li>شبّك الهاتف والكمبيوتر/الكرومكاست على نفس شبكة Wi-Fi.</li>
-    <li>من تطبيق <b>Google Home</b> اختر <b>Cast screen</b> ثم حدد الجهاز الهدف.</li>
+    <li>شبّك الأجهزة على نفس الشبكة.</li>
+    <li>من تطبيق <b>Google Home</b> اختر <b>Cast screen</b> وحدِّد الجهاز الهدف.</li>
   </ul>
 
-  <h2>الطريقة ④: إظهار شاشة الآيفون على ويندوز (AirPlay)</h2>
-  <p>يتطلب تثبيت <b>مستقبل AirPlay</b> على الكمبيوتر (برنامج استقبال)، ثم:</p>
+  <h2>الطريقة ⑤: إظهار شاشة الآيفون على ويندوز (AirPlay)</h2>
   <ul>
-    <li>اتصل على نفس شبكة Wi-Fi.</li>
-    <li>على الآيفون: اسحب مركز التحكم &gt; <b>Screen Mirroring</b> واختر اسم الكمبيوتر (المستقبل).</li>
+    <li>ثبّت برنامج <b>مستقبل AirPlay</b> على الكمبيوتر.</li>
+    <li>اتصل على نفس شبكة Wi-Fi، ثم على iPhone: <b>Control Center &gt; Screen Mirroring</b> واختر اسم الكمبيوتر.</li>
   </ul>
 
   <h2>حلول لأبرز المشاكل</h2>
   <ul>
-    <li><b>الهاتف لا يظهر في scrcpy:</b> فعّل USB Debugging، وافتح <kbd>cmd</kbd> واكتب <code>adb devices</code> للتأكد. إن ظهر <i>unauthorized</i>، افصل وأعد التوصيل واضغط Allow على الهاتف.</li>
-    <li><b>تأخير مرتفع لاسلكيًا:</b> اقترب من الراوتر، استخدم تردد 5GHz، أو انتقل لـ scrcpy عبر USB.</li>
-    <li><b>لا توجد صورة في Miracast:</b> حدّث تعريف كرت الشبكة/الواي-فاي على ويندوز، وتأكد أن جهازك يدعم Miracast.</li>
-    <li><b>جودة منخفضة:</b> في scrcpy ارفع <code>--bit-rate</code> و<code>--max-size</code> حسب قوة جهازك والشبكة.</li>
+    <li><b>الهاتف لا يظهر في scrcpy:</b> نفّذ <code>adb devices</code>. إن ظهر <i>unauthorized</i> افصل/أعد التوصيل واضغط Allow. على بعض هواتف شاومي فعّل <b>USB debugging (Security)</b>.</li>
+    <li><b>تأخير مرتفع لاسلكيًا:</b> استخدم تردد 5GHz، اقترب من الراوتر، أو ارجع لاتصال USB.</li>
+    <li><b>Miracast لا يعمل:</b> حدّث تعريفات كرت الشبكة/الواي-فاي على ويندوز وتأكد من دعم الجهاز لـ Miracast.</li>
+    <li><b>جودة منخفضة:</b> ارفع <code>--bit-rate</code> أو <code>--max-size</code> تدريجيًا حتى تصل لتوازن مناسب.</li>
   </ul>
 
-  <p class="box">
-    للمزيد من الشرح المصوّر والتفاصيل الإضافية (خيار USB، النسخ اللاسلكي، حلول بديلة…)، تفضّل بزيارة الدليل الكامل على إدراك:
-    <br>
-    <a href="https://idraaak.com/%d8%a7%d8%b8%d9%87%d8%a7%d8%b1-%d8%b4%d8%a7%d8%b4%d8%a9-%d8%a7%d9%84%d9%87%d8%a7%d8%aa%d9%81-%d8%b9%d9%84%d9%89-%d8%a7%d9%84%d9%83%d9%85%d8%a8%d9%8a%d9%88%d8%aa%d8%b1/">https://idraaak.com/%d8%a7%d8%b8%d9%87%d8%a7%d8%b1-%d8%b4%d8%a7%d8%b4%d8%a9-%d8%a7%d9%84%d9%87%d8%a7%d8%aa%d9%81-%d8%b9%d9%84%d9%89-%d8%a7%d9%84%d9%83%d9%85%d8%a8%d9%8a%d9%88%d8%aa%d8%b1/</a>
-  </p>
+  <div class="box">
+    <strong>معلومة:</strong> scrcpy لا يحتاج روت، وينقل الصورة عبر ADB. الأداء يعتمد على قدرة جهازك وجودة الكابل/الشبكة.
+  </div>
 
-  <footer>© <span id="y"></span> — نسخة موجزة للرجوع السريع. المصدر الأصلي: إدراك.</footer>
+  <footer>© <span id="y"></span> — نسخة عربية مبسطة لمساعدة المستخدمين بسرعة.</footer>
 </main>
 
-<!-- FAQ Schema لمساعدة Google على فهم الصفحة مع الإشارة للمقال الأصلي عبر canonical -->
+<!-- FAQ Schema لمساعدة محركات البحث على فهم الصفحة -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -137,34 +162,22 @@ scrcpy</code></pre>
     {
       "@type": "Question",
       "name": "ما أفضل طريقة لعرض شاشة الأندرويد على الكمبيوتر؟",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "أفضل جودة واستجابة يعطيها scrcpy عبر USB لأنه مجاني وسريع جدًا. إن أردت اللاسلكي استخدم Cast/Miracast أو Chromecast."
-      }
+      "acceptedAnswer": { "@type": "Answer", "text": "أفضل جودة واستجابة يعطيها scrcpy عبر USB لأنه مجاني وسريع جدًا. إن أردت اللاسلكي استخدم Cast/Miracast أو Chromecast." }
     },
     {
       "@type": "Question",
       "name": "كيف أشغّل scrcpy لأول مرة؟",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "فعّل USB Debugging على الهاتف، وثبت ADB وscrcpy على الكمبيوتر، ثم وصّل بالكابل وشغّل الأمر: scrcpy. عند ظهور رسالة التفويض على الهاتف اختر Allow."
-      }
+      "acceptedAnswer": { "@type": "Answer", "text": "فعّل USB Debugging على الهاتف، وثبّت ADB وscrcpy على الكمبيوتر، ثم وصّل بالكابل وشغّل الأمر: scrcpy. عند ظهور رسالة التفويض على الهاتف اختر Allow." }
     },
     {
       "@type": "Question",
       "name": "الهاتف لا يظهر في القائمة، ماذا أفعل؟",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "افتح موجه الأوامر واكتب adb devices للتأكد. إن ظهر Unauthorized، افصل وأعد التوصيل واضغط Allow. حدّث تعريفات USB وجرّب كابلًا أصليًا."
-      }
+      "acceptedAnswer": { "@type": "Answer", "text": "افتح موجه الأوامر واكتب adb devices للتأكد. إن ظهر Unauthorized، افصل وأعد التوصيل واضغط Allow. حدّث تعريفات USB وجرّب كابلًا أصليًا." }
     },
     {
       "@type": "Question",
       "name": "هل يمكن مشاركة شاشة الآيفون على ويندوز؟",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "نعم عبر برنامج مستقبل AirPlay على الكمبيوتر، ثم استخدم Screen Mirroring من مركز التحكم في iOS واختر اسم جهازك."
-      }
+      "acceptedAnswer": { "@type": "Answer", "text": "نعم عبر برنامج مستقبل AirPlay على الكمبيوتر، ثم استخدم Screen Mirroring من مركز التحكم في iOS واختر اسم جهازك." }
     }
   ]
 }
