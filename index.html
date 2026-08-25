@@ -2,187 +2,416 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <title>إظهار شاشة الهاتف على الكمبيوتر (أندرويد و آيفون) | دليل سريع + أوامر scrcpy</title>
-  <meta name="description" content="أفضل طرق عرض شاشة الهاتف على الكمبيوتر: scrcpy عبر USB واللاسلكي، Cast/Miracast، Chromecast/Google Home، ومستقبلات AirPlay للآيفون. خطوات مفصّلة، أوامر جاهزة، وحلول لأبرز المشاكل.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <!-- نجعل الصفحة تشير إلى نفسها لبحث جوجل -->
+  <title>مولّد أوامر scrcpy العربي | scrcpy-helper-ar</title>
+  <meta name="description" content="أنشئ أمر scrcpy المناسب للأداء أو الجودة أو التسجيل، وانسخه أو نزّله كملف تشغيل لويندوز ولينكس من دون إرسال بياناتك.">
   <link rel="canonical" href="https://nedal-dev.github.io/scrcpy-helper-ar/">
   <meta name="robots" content="index,follow">
-
-  <!-- OG -->
-  <meta property="og:title" content="إظهار شاشة الهاتف على الكمبيوتر | دليل سريع + أوامر scrcpy">
-  <meta property="og:description" content="كل الطرق المهمة: scrcpy عبر USB واللاسلكي، الإرسال Cast/Miracast، Chromecast، و AirPlay للآيفون مع حلول للمشاكل.">
-  <meta property="og:type" content="article">
+  <meta property="og:title" content="مولّد أوامر scrcpy العربي">
+  <meta property="og:description" content="اختر الإعدادات وأنشئ أمر scrcpy أو ملف تشغيل جاهز، مع مساعد عربي لحل أخطاء الاتصال.">
+  <meta property="og:type" content="website">
   <meta property="og:url" content="https://nedal-dev.github.io/scrcpy-helper-ar/">
-
   <style>
-    :root { --w: 880px; }
-    body { margin:0; font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif; line-height:1.9; background:#fff; color:#0f172a; }
-    main { max-width:var(--w); margin:44px auto; padding:0 18px; }
-    h1{font-size:1.9rem; margin:.2em 0 .8em}
-    h2{font-size:1.35rem; margin:1.6em 0 .6em}
-    h3{font-size:1.1rem; margin:1.2em 0 .4em}
-    p{margin:.55em 0}
-    a{color:#0b5ed7; text-decoration:none}
-    a:hover{text-decoration:underline}
-    .box{background:#f7f9fc;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;margin:.6em 0 1.1em}
-    .cta{display:inline-block;background:#0d6efd;color:#fff;border:1px solid #0a58ca;padding:10px 14px;border-radius:10px;text-decoration:none}
-    .cta:hover{background:#0b5ed7}
-    code,kbd{background:#f3f4f6;border:1px solid #e5e7eb;border-radius:6px;padding:2px 6px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-    pre{background:#0b1220;color:#e5e7eb;border-radius:12px;padding:12px 14px;overflow:auto}
-    table{width:100%;border-collapse:collapse;margin:.6em 0 1.2em}
-    th,td{border:1px solid #e5e7eb;padding:8px 10px;text-align:center}
-    th{background:#f3f4f6}
-    ul{padding-inline-start:20px;margin:.3em 0}
-    footer{margin:28px 0 14px;color:#5b6472;font-size:.95rem;text-align:center}
+    :root {
+      color-scheme: light;
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --text:#172033;
+      --muted:#5d677b;
+      --line:#dfe4ec;
+      --primary:#1769aa;
+      --primary-dark:#0f4f82;
+      --soft:#eaf4fc;
+      --accent:#f59e0b;
+      --danger:#b42318;
+      --success:#157347;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Tahoma,"Segoe UI",Arial,sans-serif;
+      line-height:1.8;
+    }
+    a { color:var(--primary); }
+    button,select,input { font:inherit; }
+    .site-header {
+      background:linear-gradient(135deg,#0f4f82,#1769aa);
+      color:#fff;
+      padding:34px 16px 42px;
+    }
+    .wrap { width:min(920px,100%); margin:0 auto; }
+    .site-header h1 { margin:0 0 8px; font-size:clamp(1.75rem,6vw,2.55rem); line-height:1.35; }
+    .site-header p { margin:0; max-width:720px; color:#eaf4fc; }
+    main { padding:0 14px 38px; }
+    .panel {
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px;
+      margin:18px 0;
+    }
+    .tool-panel { margin-top:-22px; position:relative; }
+    h2 { margin:0 0 8px; font-size:1.45rem; line-height:1.45; }
+    h3 { margin:22px 0 8px; font-size:1.08rem; }
+    .intro,.hint { color:var(--muted); margin:0 0 16px; }
+    .preset-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin:12px 0 20px;
+    }
+    .preset {
+      min-height:64px;
+      padding:10px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff;
+      color:var(--text);
+      cursor:pointer;
+      text-align:right;
+    }
+    .preset:hover,.preset:focus-visible { border-color:var(--primary); outline:3px solid var(--soft); }
+    .preset.active { border-color:var(--primary); background:var(--soft); color:var(--primary-dark); font-weight:700; }
+    .fields {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    .field label { display:block; font-weight:700; margin-bottom:5px; }
+    select {
+      width:100%;
+      min-height:46px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:#fff;
+      color:var(--text);
+      padding:8px 10px;
+    }
+    .checks {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:8px;
+      margin-top:16px;
+    }
+    .check {
+      display:flex;
+      align-items:center;
+      gap:9px;
+      min-height:44px;
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      cursor:pointer;
+    }
+    .check input { width:19px; height:19px; accent-color:var(--primary); }
+    .output-label { display:block; font-weight:700; margin:20px 0 7px; }
+    .command-wrap {
+      direction:ltr;
+      text-align:left;
+      background:#101827;
+      color:#e7edf7;
+      border-radius:12px;
+      padding:14px;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      min-height:62px;
+    }
+    #command { font-family:Consolas,"Courier New",monospace; }
+    .actions { display:grid; grid-template-columns:1fr; gap:9px; margin-top:12px; }
+    .action {
+      min-height:46px;
+      border:1px solid var(--primary);
+      border-radius:10px;
+      padding:9px 13px;
+      cursor:pointer;
+      background:#fff;
+      color:var(--primary-dark);
+      font-weight:700;
+    }
+    .action.primary { color:#fff; background:var(--primary); }
+    .action:hover,.action:focus-visible { outline:3px solid var(--soft); }
+    .status { min-height:28px; margin:8px 0 0; color:var(--success); font-weight:700; }
+    .diagnostic-result {
+      margin-top:12px;
+      padding:13px 14px;
+      background:#f8fafc;
+      border-right:4px solid var(--accent);
+      border-radius:10px;
+    }
+    .diagnostic-result.error { border-color:var(--danger); }
+    .diagnostic-result.success { border-color:var(--success); }
+    .steps { margin:10px 0 0; padding-right:22px; }
+    .privacy {
+      background:#f0f8f4;
+      border-right:4px solid var(--success);
+      padding:12px 14px;
+      border-radius:10px;
+    }
+    .cta {
+      display:inline-flex;
+      align-items:center;
+      min-height:44px;
+      padding:8px 14px;
+      border-radius:10px;
+      background:var(--primary);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+    }
+    footer { padding:22px 14px 34px; color:var(--muted); text-align:center; }
+    @media (min-width:640px) {
+      main { padding-inline:20px; }
+      .panel { padding:24px; }
+      .preset-grid { grid-template-columns:repeat(5,minmax(0,1fr)); }
+      .fields { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .checks { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .actions { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"مولّد أوامر scrcpy العربي",
+    "url":"https://nedal-dev.github.io/scrcpy-helper-ar/",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Windows, macOS, Linux",
+    "isAccessibleForFree":true,
+    "description":"أداة عربية تنشئ أوامر scrcpy وملفات تشغيل وفق الإعدادات التي يختارها المستخدم."
+  }
+  </script>
 </head>
 <body>
-<main>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>مولّد أوامر scrcpy العربي</h1>
+      <p>اختر ما تحتاجه، ثم انسخ الأمر أو نزّله كملف تشغيل. جميع الخيارات تُعالج داخل متصفحك ولا تُرسل إلى أي خادم.</p>
+    </div>
+  </header>
 
-  <h1>إظهار شاشة الهاتف على الكمبيوتر (أندرويد و آيفون)</h1>
+  <main class="wrap">
+    <section class="panel tool-panel" aria-labelledby="generator-title">
+      <h2 id="generator-title">أنشئ الأمر المناسب</h2>
+      <p class="intro">ابدأ بوضع جاهز ثم عدّل الإعدادات يدويًا إذا أردت.</p>
 
-  <div class="box">
-    <strong>الخلاصة السريعة:</strong>
-    لأفضل دقة واستجابة استخدم <b>scrcpy عبر USB</b>. للراحة اللاسلكية: <b>Cast/Miracast</b> أو <b>Chromecast</b>. وللآيفون تحتاج <b>مستقبل AirPlay</b> على ويندوز.
-  </div>
+      <div class="preset-grid" aria-label="الأوضاع الجاهزة">
+        <button class="preset active" type="button" data-preset="balanced">متوازن<br><small>للاستخدام اليومي</small></button>
+        <button class="preset" type="button" data-preset="performance">أسرع أداء<br><small>لتقليل التقطيع</small></button>
+        <button class="preset" type="button" data-preset="quality">جودة عالية<br><small>لصورة أوضح</small></button>
+        <button class="preset" type="button" data-preset="presentation">عرض تقديمي<br><small>ملء الشاشة</small></button>
+        <button class="preset" type="button" data-preset="recording">تسجيل<br><small>حفظ ملف MKV</small></button>
+      </div>
 
-  <h2>مقارنة سريعة بين الطرق</h2>
-  <table>
-    <thead>
-      <tr><th>الطريقة</th><th>الدقة/الوضوح</th><th>الاستجابة</th><th>المنصات</th><th>ملاحظات</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>scrcpy (USB)</td><td>عالية جدًا (حتى 1080p+)</td><td>الأفضل (أقل تأخير)</td><td>Windows / macOS / Linux (أندرويد)</td><td>مجاني ومفتوح المصدر؛ يحتاج ADB وUSB Debugging</td></tr>
-      <tr><td>scrcpy لاسلكي</td><td>جيدة</td><td>جيّدة</td><td>نفس أعلاه</td><td>يتطلب شبكة Wi-Fi قوية</td></tr>
-      <tr><td>Cast / Miracast</td><td>جيدة</td><td>متوسطة</td><td>أندرويد ⇄ ويندوز 10/11</td><td>يشترط دعم Miracast ونفس الشبكة</td></tr>
-      <tr><td>Chromecast / Google Home</td><td>جيدة–عالية</td><td>متوسطة</td><td>أندرويد ⇄ أي جهاز يدعم Chromecast</td><td>حل مستقر وسهل</td></tr>
-      <tr><td>AirPlay (آيفون)</td><td>عالية</td><td>متوسطة</td><td>iOS ⇄ Windows (مع مستقبل AirPlay)</td><td>يتطلب برنامج استقبال على الكمبيوتر</td></tr>
-    </tbody>
-  </table>
+      <div class="fields">
+        <div class="field">
+          <label for="size">أقصى حجم للصورة</label>
+          <select id="size">
+            <option value="">الافتراضي</option>
+            <option value="720">720</option>
+            <option value="1080" selected>1080</option>
+            <option value="1920">1920</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fps">معدل الإطارات</label>
+          <select id="fps">
+            <option value="">الافتراضي</option>
+            <option value="30" selected>30 FPS</option>
+            <option value="60">60 FPS</option>
+            <option value="90">90 FPS</option>
+            <option value="120">120 FPS</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bitrate">معدل نقل الفيديو</label>
+          <select id="bitrate">
+            <option value="">الافتراضي</option>
+            <option value="4M">4 Mbps</option>
+            <option value="8M" selected>8 Mbps</option>
+            <option value="16M">16 Mbps</option>
+            <option value="32M">32 Mbps</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="codec">ترميز الفيديو</label>
+          <select id="codec">
+            <option value="h264" selected>H.264 — توافق وتأخير أقل</option>
+            <option value="h265">H.265 — جودة أعلى عند دعمه</option>
+            <option value="av1">AV1 — يحتاج جهازًا داعمًا</option>
+          </select>
+        </div>
+      </div>
 
-  <h2>الطريقة ①: scrcpy عبر USB (أندرويد)</h2>
-  <p><b>الأفضل للمونتاج والشرح والبث</b> لأن التأخير منخفض جدًا والصورة واضحة.</p>
+      <div class="checks">
+        <label class="check"><input id="audio" type="checkbox" checked> تشغيل صوت الهاتف عند دعمه</label>
+        <label class="check"><input id="control" type="checkbox" checked> السماح بالتحكم من الكمبيوتر</label>
+        <label class="check"><input id="screenOff" type="checkbox" checked> إطفاء شاشة الهاتف</label>
+        <label class="check"><input id="stayAwake" type="checkbox"> إبقاء الهاتف نشطًا أثناء التوصيل</label>
+        <label class="check"><input id="fullscreen" type="checkbox"> فتح العرض بملء الشاشة</label>
+        <label class="check"><input id="alwaysOnTop" type="checkbox"> إبقاء النافذة في المقدمة</label>
+        <label class="check"><input id="record" type="checkbox"> تسجيل الجلسة في ملف MKV</label>
+      </div>
 
-  <h3>خطوات التحضير على الهاتف</h3>
-  <ul>
-    <li>فعِّل <b>خيارات المطوّر</b> ثم <b>USB Debugging</b> (وفي بعض الأجهزة: <b>USB debugging (Security)</b>).</li>
-    <li>عند التوصيل لأول مرة ستظهر رسالة <b>Allow USB debugging</b> على الهاتف — اختر <b>Allow</b>.</li>
-  </ul>
+      <span class="output-label">الأمر الناتج</span>
+      <div class="command-wrap" aria-live="polite"><code id="command">scrcpy</code></div>
+      <div class="actions">
+        <button id="copy" class="action primary" type="button">نسخ الأمر</button>
+        <button id="downloadBat" class="action" type="button">تنزيل ملف Windows</button>
+        <button id="downloadSh" class="action" type="button">تنزيل ملف Linux / macOS</button>
+      </div>
+      <p id="status" class="status" role="status"></p>
+      <p class="hint">معدل الإطارات والجودة الفعليان يعتمدان على الهاتف والترميز. إذا فشل H.265 أو AV1، ارجع إلى H.264.</p>
+    </section>
 
-  <h3>التثبيت السريع على الكمبيوتر</h3>
-  <ul>
-    <li><b>Windows</b>: ثبّت ADB وscrcpy، ثم افتح <kbd>cmd</kbd> وشغّل:
-      <pre><code>choco install adb scrcpy   <!-- إن كان لديك Chocolatey -->
-:: أو حمّل scrcpy من صفحة الإصدارات الرسمية وثبّته يدويًا</code></pre>
-    </li>
-    <li><b>macOS</b>:
-      <pre><code>brew install android-platform-tools scrcpy</code></pre>
-    </li>
-    <li><b>Ubuntu/Debian</b>:
-      <pre><code>sudo apt update
-sudo apt install scrcpy adb</code></pre>
-    </li>
-  </ul>
+    <section class="panel" aria-labelledby="diagnostic-title">
+      <h2 id="diagnostic-title">حل المشكلة حسب رسالة ADB</h2>
+      <p class="intro">نفّذ <code dir="ltr">adb devices</code> في الطرفية، ثم اختر النتيجة الأقرب لما ظهر لديك.</p>
+      <div class="field">
+        <label for="adbState">ماذا ظهر؟</label>
+        <select id="adbState">
+          <option value="missing">الأمر adb غير معروف</option>
+          <option value="empty">لا يظهر أي جهاز</option>
+          <option value="unauthorized">يظهر unauthorized</option>
+          <option value="offline">يظهر offline</option>
+          <option value="device">يظهر device لكن scrcpy لا يعمل</option>
+          <option value="scrcpyMissing">الأمر scrcpy غير معروف</option>
+        </select>
+      </div>
+      <div id="diagnosticResult" class="diagnostic-result"></div>
+    </section>
 
-  <h3>تشغيل scrcpy</h3>
-  <ul>
-    <li>وصّل الهاتف بكابل USB أصلي، ثم:
-      <pre><code>scrcpy</code></pre>
-    </li>
-  </ul>
+    <section class="panel" aria-labelledby="scripts-title">
+      <h2 id="scripts-title">تريد فحصًا وتشغيلًا تلقائيًا؟</h2>
+      <p>تتضمن نسخة <strong>scrcpy-helper-ar v2</strong> سكربتًا تفاعليًا يفحص وجود ADB وscrcpy وحالة الهاتف وإصدار أندرويد، ثم يعرض أوضاع التشغيل ويستطيع إنشاء تقرير تشخيصي محلي.</p>
+      <p><a class="cta" href="https://github.com/nedal-dev/scrcpy-helper-ar">تنزيل السكربت من GitHub</a></p>
+      <div class="privacy"><strong>الخصوصية:</strong> لا تجمع الصفحة ولا السكربتات بيانات، ولا يتضمن التقرير التشخيصي الرقم التسلسلي للهاتف.</div>
+    </section>
 
-  <h3>أوامر مفيدة</h3>
-  <ul>
-    <li>تصغير الدقة لتقليل الضغط:
-      <pre><code>scrcpy --max-size 1080</code></pre>
-    </li>
-    <li>تخفيض البت ريت لاتصال أضعف:
-      <pre><code>scrcpy --bit-rate 4M</code></pre>
-    </li>
-    <li>ملء الشاشة:
-      <pre><code>scrcpy --fullscreen</code></pre>
-    </li>
-    <li>تسجيل الشاشة أثناء العرض:
-      <pre><code>scrcpy --record session.mp4</code></pre>
-    </li>
-    <li>إطفاء شاشة الهاتف أثناء العرض لتوفير البطارية:
-      <pre><code>scrcpy --turn-screen-off</code></pre>
-    </li>
-  </ul>
+    <section class="panel" aria-labelledby="article-title">
+      <h2 id="article-title">تحتاج شرح الطرق والبدائل؟</h2>
+      <p>يعرض مقال إدراك خطوات scrcpy ويقارنه مع ApowerMirror وVysor وAirDroid Cast، مع حلول مشكلات الكابل والصوت والتحكم.</p>
+      <p><a class="cta" href="https://idraaak.com/%d8%a7%d8%b8%d9%87%d8%a7%d8%b1-%d8%b4%d8%a7%d8%b4%d8%a9-%d8%a7%d9%84%d9%87%d8%a7%d8%aa%d9%81-%d8%b9%d9%84%d9%89-%d8%a7%d9%84%d9%83%d9%85%d8%a8%d9%8a%d9%88%d8%aa%d8%b1/">أفضل 4 طرق لعرض شاشة الجوال على الكمبيوتر عن طريق USB</a></p>
+    </section>
+  </main>
 
-  <h2>الطريقة ②: scrcpy لاسلكي (Android over Wi-Fi)</h2>
-  <p>إعداد لمرة واحدة عبر USB، ثم الاتصال عبر الشبكة.</p>
-  <pre><code>adb tcpip 5555
-adb connect 192.168.x.x:5555   # استبدل بعنوان هاتفك
-scrcpy</code></pre>
-  <p class="box">إن لم يتصل: تأكد من أن الهاتف والكمبيوتر على نفس الشبكة، وأن جدار الحماية لا يحجب المنفذ 5555.</p>
+  <footer>مشروع عربي مفتوح المصدر من نضال ش. — <a href="https://idraaak.com/">إدراك</a></footer>
 
-  <h2>الطريقة ③: الإرسال اللاسلكي (Cast / Miracast)</h2>
-  <ul>
-    <li>تأكد أن الهاتف والكمبيوتر على <b>نفس شبكة Wi-Fi</b>.</li>
-    <li>على ويندوز: فعّل <b>Wireless Display</b> ثم افتح <b>Settings &gt; System &gt; Projecting to this PC</b>.</li>
-    <li>على الهاتف: افتح <b>Cast / Smart View / Screen Share</b> واختر جهاز الكمبيوتر.</li>
-  </ul>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const controls = ['size','fps','bitrate','codec','audio','control','screenOff','stayAwake','fullscreen','alwaysOnTop','record'];
 
-  <h2>الطريقة ④: Chromecast / Google Home</h2>
-  <ul>
-    <li>شبّك الأجهزة على نفس الشبكة.</li>
-    <li>من تطبيق <b>Google Home</b> اختر <b>Cast screen</b> وحدِّد الجهاز الهدف.</li>
-  </ul>
+    const presets = {
+      balanced: {size:'1080',fps:'30',bitrate:'8M',codec:'h264',audio:true,control:true,screenOff:true,stayAwake:false,fullscreen:false,alwaysOnTop:false,record:false},
+      performance: {size:'720',fps:'30',bitrate:'4M',codec:'h264',audio:false,control:true,screenOff:true,stayAwake:false,fullscreen:false,alwaysOnTop:false,record:false},
+      quality: {size:'1920',fps:'60',bitrate:'16M',codec:'h264',audio:true,control:true,screenOff:false,stayAwake:false,fullscreen:false,alwaysOnTop:false,record:false},
+      presentation: {size:'1080',fps:'30',bitrate:'8M',codec:'h264',audio:true,control:true,screenOff:true,stayAwake:true,fullscreen:true,alwaysOnTop:false,record:false},
+      recording: {size:'1080',fps:'30',bitrate:'8M',codec:'h264',audio:true,control:true,screenOff:false,stayAwake:false,fullscreen:false,alwaysOnTop:false,record:true}
+    };
 
-  <h2>الطريقة ⑤: إظهار شاشة الآيفون على ويندوز (AirPlay)</h2>
-  <ul>
-    <li>ثبّت برنامج <b>مستقبل AirPlay</b> على الكمبيوتر.</li>
-    <li>اتصل على نفس شبكة Wi-Fi، ثم على iPhone: <b>Control Center &gt; Screen Mirroring</b> واختر اسم الكمبيوتر.</li>
-  </ul>
-
-  <h2>حلول لأبرز المشاكل</h2>
-  <ul>
-    <li><b>الهاتف لا يظهر في scrcpy:</b> نفّذ <code>adb devices</code>. إن ظهر <i>unauthorized</i> افصل/أعد التوصيل واضغط Allow. على بعض هواتف شاومي فعّل <b>USB debugging (Security)</b>.</li>
-    <li><b>تأخير مرتفع لاسلكيًا:</b> استخدم تردد 5GHz، اقترب من الراوتر، أو ارجع لاتصال USB.</li>
-    <li><b>Miracast لا يعمل:</b> حدّث تعريفات كرت الشبكة/الواي-فاي على ويندوز وتأكد من دعم الجهاز لـ Miracast.</li>
-    <li><b>جودة منخفضة:</b> ارفع <code>--bit-rate</code> أو <code>--max-size</code> تدريجيًا حتى تصل لتوازن مناسب.</li>
-  </ul>
-
-  <div class="box">
-    <strong>معلومة:</strong> scrcpy لا يحتاج روت، وينقل الصورة عبر ADB. الأداء يعتمد على قدرة جهازك وجودة الكابل/الشبكة.
-  </div>
-
-  <footer>© <span id="y"></span> — نسخة عربية مبسطة لمساعدة المستخدمين بسرعة.</footer>
-</main>
-
-<!-- FAQ Schema لمساعدة محركات البحث على فهم الصفحة -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "ما أفضل طريقة لعرض شاشة الأندرويد على الكمبيوتر؟",
-      "acceptedAnswer": { "@type": "Answer", "text": "أفضل جودة واستجابة يعطيها scrcpy عبر USB لأنه مجاني وسريع جدًا. إن أردت اللاسلكي استخدم Cast/Miracast أو Chromecast." }
-    },
-    {
-      "@type": "Question",
-      "name": "كيف أشغّل scrcpy لأول مرة؟",
-      "acceptedAnswer": { "@type": "Answer", "text": "فعّل USB Debugging على الهاتف، وثبّت ADB وscrcpy على الكمبيوتر، ثم وصّل بالكابل وشغّل الأمر: scrcpy. عند ظهور رسالة التفويض على الهاتف اختر Allow." }
-    },
-    {
-      "@type": "Question",
-      "name": "الهاتف لا يظهر في القائمة، ماذا أفعل؟",
-      "acceptedAnswer": { "@type": "Answer", "text": "افتح موجه الأوامر واكتب adb devices للتأكد. إن ظهر Unauthorized، افصل وأعد التوصيل واضغط Allow. حدّث تعريفات USB وجرّب كابلًا أصليًا." }
-    },
-    {
-      "@type": "Question",
-      "name": "هل يمكن مشاركة شاشة الآيفون على ويندوز؟",
-      "acceptedAnswer": { "@type": "Answer", "text": "نعم عبر برنامج مستقبل AirPlay على الكمبيوتر، ثم استخدم Screen Mirroring من مركز التحكم في iOS واختر اسم جهازك." }
+    function setControl(id,value) {
+      const el=$(id);
+      if (el.type === 'checkbox') el.checked=value;
+      else el.value=value;
     }
-  ]
-}
-</script>
 
-<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+    function applyPreset(name) {
+      const values=presets[name];
+      Object.entries(values).forEach(([id,value]) => setControl(id,value));
+      document.querySelectorAll('.preset').forEach((button) => button.classList.toggle('active',button.dataset.preset===name));
+      updateCommand();
+    }
+
+    function buildCommand() {
+      const args=[];
+      if ($('size').value) args.push(`--max-size=${$('size').value}`);
+      if ($('fps').value) args.push(`--max-fps=${$('fps').value}`);
+      if ($('bitrate').value) args.push(`--video-bit-rate=${$('bitrate').value}`);
+      if ($('codec').value !== 'h264') args.push(`--video-codec=${$('codec').value}`);
+      if (!$('audio').checked) args.push('--no-audio');
+      if (!$('control').checked) args.push('--no-control');
+      if ($('screenOff').checked) args.push('--turn-screen-off');
+      if ($('stayAwake').checked) args.push('--stay-awake');
+      if ($('fullscreen').checked) args.push('--fullscreen');
+      if ($('alwaysOnTop').checked) args.push('--always-on-top');
+      if ($('record').checked) args.push('--record=scrcpy-recording.mkv');
+      return ['scrcpy',...args].join(' ');
+    }
+
+    function updateCommand() {
+      $('command').textContent=buildCommand();
+      $('status').textContent='';
+    }
+
+    async function copyCommand() {
+      const command=buildCommand();
+      try {
+        await navigator.clipboard.writeText(command);
+      } catch (_) {
+        const area=document.createElement('textarea');
+        area.value=command;
+        area.style.position='fixed';
+        area.style.opacity='0';
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand('copy');
+        area.remove();
+      }
+      $('status').textContent='تم نسخ الأمر.';
+    }
+
+    function downloadFile(filename,content,type='text/plain;charset=utf-8') {
+      const blob=new Blob([content],{type});
+      const url=URL.createObjectURL(blob);
+      const link=document.createElement('a');
+      link.href=url;
+      link.download=filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      $('status').textContent=`تم إنشاء ${filename}.`;
+    }
+
+    function downloadBat() {
+      const content=`@echo off\r\nchcp 65001 >nul\r\n${buildCommand()}\r\npause\r\n`;
+      downloadFile('scrcpy-custom.bat',content);
+    }
+
+    function downloadSh() {
+      const content=`#!/usr/bin/env bash\n${buildCommand()}\n`;
+      downloadFile('scrcpy-custom.sh',content);
+    }
+
+    const diagnosticMessages = {
+      missing: {type:'error',html:'<strong>ADB غير مثبت أو غير موجود في PATH.</strong><ol class="steps"><li>نزّل scrcpy من صفحة الإصدارات الرسمية.</li><li>افتح الطرفية داخل مجلد scrcpy نفسه.</li><li>نفّذ <code dir="ltr">adb --version</code> للتأكد.</li></ol>'},
+      empty: {type:'error',html:'<strong>ADB يعمل لكنه لا يرى الهاتف.</strong><ol class="steps"><li>استخدم كابل بيانات لا كابل شحن فقط.</li><li>افتح قفل الهاتف واختر نقل الملفات من إشعار USB.</li><li>فعّل USB Debugging وجرّب منفذًا آخر.</li></ol>'},
+      unauthorized: {type:'error',html:'<strong>الكمبيوتر لم يحصل على تفويض الهاتف.</strong><ol class="steps"><li>افتح شاشة الهاتف واضغط سماح.</li><li>إذا لم تظهر الرسالة، اسحب تفويضات تصحيح USB من خيارات المطور.</li><li>افصل الكابل وأعد توصيله.</li></ol>'},
+      offline: {type:'error',html:'<strong>اتصال ADB موجود لكنه متوقف.</strong><ol class="steps"><li>افصل الكابل وأعد تشغيل USB Debugging.</li><li>نفّذ <code dir="ltr">adb kill-server</code> ثم <code dir="ltr">adb start-server</code>.</li><li>أعد توصيل الهاتف.</li></ol>'},
+      device: {type:'success',html:'<strong>اتصال ADB سليم.</strong><ol class="steps"><li>نفّذ <code dir="ltr">scrcpy --version</code>.</li><li>شغّل <code dir="ltr">scrcpy</code> من الطرفية لرؤية الخطأ كاملًا.</li><li>جرّب الإعدادات الافتراضية قبل إضافة أي خيارات.</li></ol>'},
+      scrcpyMissing: {type:'error',html:'<strong>ADB موجود لكن scrcpy غير مثبت أو غير موجود في PATH.</strong><ol class="steps"><li>نزّل الإصدار الرسمي وفك الضغط.</li><li>افتح الطرفية داخل مجلد scrcpy.</li><li>شغّل الأمر من هناك أو أضف المجلد إلى PATH.</li></ol>'}
+    };
+
+    function updateDiagnostic() {
+      const message=diagnosticMessages[$('adbState').value];
+      const result=$('diagnosticResult');
+      result.className=`diagnostic-result ${message.type}`;
+      result.innerHTML=message.html;
+    }
+
+    document.querySelectorAll('.preset').forEach((button) => button.addEventListener('click',() => applyPreset(button.dataset.preset)));
+    controls.forEach((id) => $(id).addEventListener('change',() => {
+      document.querySelectorAll('.preset').forEach((button) => button.classList.remove('active'));
+      updateCommand();
+    }));
+    $('copy').addEventListener('click',copyCommand);
+    $('downloadBat').addEventListener('click',downloadBat);
+    $('downloadSh').addEventListener('click',downloadSh);
+    $('adbState').addEventListener('change',updateDiagnostic);
+
+    updateCommand();
+    updateDiagnostic();
+  </script>
 </body>
 </html>
