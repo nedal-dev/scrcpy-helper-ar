@@ -1,0 +1,84 @@
+name: تقرير توافق جهاز
+description: شارك نتيجة تشغيل scrcpy-helper-ar على هاتفك
+title: "[توافق] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        شكرًا لمشاركة النتيجة. لا تكتب الرقم التسلسلي للهاتف أو أي بيانات شخصية.
+  - type: input
+    id: phone
+    attributes:
+      label: طراز الهاتف
+      placeholder: "مثال: Samsung Galaxy S23"
+    validations:
+      required: true
+  - type: input
+    id: android
+    attributes:
+      label: إصدار أندرويد
+      placeholder: "مثال: Android 14"
+    validations:
+      required: true
+  - type: dropdown
+    id: computer_os
+    attributes:
+      label: نظام الكمبيوتر
+      options:
+        - Windows 11
+        - Windows 10
+        - macOS
+        - Linux
+        - نظام آخر
+    validations:
+      required: true
+  - type: input
+    id: scrcpy_version
+    attributes:
+      label: إصدار scrcpy
+      description: يظهر عند تنفيذ scrcpy --version
+      placeholder: "مثال: 4.1"
+    validations:
+      required: true
+  - type: dropdown
+    id: connection
+    attributes:
+      label: نوع الاتصال
+      options:
+        - USB
+        - Wi-Fi
+    validations:
+      required: true
+  - type: checkboxes
+    id: result
+    attributes:
+      label: ما الذي عمل؟
+      options:
+        - label: ظهرت شاشة الهاتف
+        - label: عمل التحكم من الكمبيوتر
+        - label: انتقل صوت الهاتف
+        - label: عمل تسجيل الشاشة
+  - type: dropdown
+    id: adb_state
+    attributes:
+      label: حالة ADB
+      options:
+        - device
+        - unauthorized
+        - offline
+        - لم يظهر الهاتف
+        - لم أتحقق
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: ملاحظات أو مشكلة ظهرت
+      description: اذكر وضع التشغيل ورسالة الخطأ إن وجدت، بعد حذف أي بيانات شخصية.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: تأكيد الخصوصية
+      options:
+        - label: تأكدت من عدم تضمين الرقم التسلسلي أو بيانات شخصية.
+          required: true
